@@ -1,6 +1,12 @@
+from setuptools import setup
+
+# Використовується для опису пакета на PyPI
+with open("README.md", 'r', encoding="utf-8") as f:
+    long_description = f.read()
+
 setup(
-    name='python-sample-app-kboretska',  # Унікальна назва пакета
-    version='1.0',
+    name='python-sample-app-kboretska',  # Оновлена унікальна назва
+    version='1.0.1',  # Якщо така версія вже є, підніми (1.0.2 і т.д.)
     description='Python Sample App - Starter Template',
     author='Kateryna Boretska',
     author_email='your.email@example.com',
