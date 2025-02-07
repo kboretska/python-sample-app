@@ -6,7 +6,7 @@ with open("README.md", 'r', encoding="utf-8") as f:
 
 setup(
     name='python-sample-app-kboretska',  # Оновлена унікальна назва
-    version='1.0.2',  # Якщо така версія вже є, підніми (1.0.2 і т.д.)
+    version='1.0.3',  # Якщо така версія вже є, підніми (1.0.2 і т.д.)
     description='Python Sample App - Starter Template',
     author='Kateryna Boretska',
     author_email='your.email@example.com',
