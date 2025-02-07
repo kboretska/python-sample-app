@@ -4,41 +4,37 @@ pipeline {
     environment {
         PYPI_TOKEN = credentials('PYPI_API_TOKEN')  // Отримуємо Test PyPI API Token з Jenkins
     }
-    script {
-    sh 'echo "PyPI API Token: ${PYPI_API_TOKEN}"'
-}
-
 
     stages {
         stage('Build and Test') {
             steps {
-                script {
-                    echo "🛠 Створення віртуального середовища..."
-                    sh 'python3 -m venv venv'
-                    sh '. venv/bin/activate && pip install --upgrade pip setuptools wheel'
+                echo "🛠 Створення віртуального середовища..."
+                sh 'python3 -m venv venv'
+                sh '. venv/bin/activate && pip install --upgrade pip setuptools wheel'
 
-                    echo "📦 Встановлення залежностей..."
-                    sh '. venv/bin/activate && pip install .'
+                echo "📦 Встановлення залежностей..."
+                sh '. venv/bin/activate && pip install .'
 
-                    echo "✅ Запуск тестів..."
-                    sh '. venv/bin/activate && pytest || true'
-                }
+                echo "✅ Запуск тестів..."
+                sh '. venv/bin/activate && pytest || true'
             }
         }
 
         stage('Package and Deploy') {
             steps {
-                script {
-                    echo "📦 Створення Python-пакету..."
-                    sh '. venv/bin/activate && python setup.py sdist bdist_wheel'
+                echo "📦 Створення Python-пакету..."
+                sh '''
+                    . venv/bin/activate
+                    rm -rf dist/*
+                    python setup.py sdist bdist_wheel
+                '''
 
-                    echo "🚀 Завантаження пакету на Test PyPI..."
-                    sh '''
-                        . venv/bin/activate
-                        pip install --upgrade twine
-                        twine upload --repository-url https://test.pypi.org/legacy/ dist/* -u __token__ -p $PYPI_TOKEN
-                    '''
-                }
+                echo "🚀 Завантаження пакету на Test PyPI..."
+                sh '''
+                    . venv/bin/activate
+                    pip install --upgrade twine
+                    twine upload --verbose --repository-url https://test.pypi.org/legacy/ dist/* -u __token__ -p $PYPI_TOKEN
+                '''
             }
         }
     }
