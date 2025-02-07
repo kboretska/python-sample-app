@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PYPI_TOKEN = credentials('PYPI_API_TOKEN')  // Отримуємо Test PyPI API Token з Jenkins
+        PYPI_TOKEN = "pypi-AgENdGVzdC5weXBpLm9yZwIkZjVhZmU2OTItYTE5Mi00ZDBkLWFhYmMtNDI1YjNkYjExOWIxAAIqWzMsIjQyNjk5ZDJiLTlkZTktNDQ5ZS04YjQ4LWMyOGUxNmVkN2NlYiJdAAAGIA_HyGPKP2SRp2EJRdaEsjXBGYqoSD7BHtINrsuTd9Ir"  // Отримуємо Test PyPI API Token з Jenkins
     }
 
     stages {
