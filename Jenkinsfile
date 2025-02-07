@@ -4,6 +4,10 @@ pipeline {
     environment {
         PYPI_TOKEN = credentials('PYPI_API_TOKEN')  // Отримуємо Test PyPI API Token з Jenkins
     }
+    script {
+    sh 'echo "PyPI API Token: ${PYPI_API_TOKEN}"'
+}
+
 
     stages {
         stage('Build and Test') {
