@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     echo "📦 Створення Python-пакету..."
-                    sh '. venv/bin/activate && python setup.py sdist bdist_wheel'
+                    sh '. venv/bin/activate && python3 setup.py sdist bdist_wheel'
 
                     echo "🚀 Завантаження пакету у PyPI..."
                     sh '''
