@@ -5,11 +5,11 @@ with open("README.md", 'r', encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
-    name='python-sample-app-kboretska',  # Оновлена унікальна назва
+    name='python-sample-app-kboretska',  
     version='1.0.3',  # Якщо така версія вже є, підніми (1.0.2 і т.д.)
     description='Python Sample App - Starter Template',
     author='Kateryna Boretska',
-    author_email='your.email@example.com',
+    author_email='k.boretska@gmail.com',
     license="MIT",
     url="https://github.com/kboretska/python-sample-app",
     packages=['python_sample_app'],
