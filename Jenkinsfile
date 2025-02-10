@@ -2,34 +2,34 @@ pipeline {
     agent any
 
     environment {
-        PYPI_TOKEN = credentials('PYPI_API_TOKEN')  // Отримуємо Test PyPI API Token з Jenkins
+        PYPI_TOKEN = credentials('PYPI_API_TOKEN')  // Retrieve Test PyPI API Token from Jenkins
     }
 
     stages {
         stage('Build and Test') {
             steps {
-                echo "🛠 Створення віртуального середовища..."
+                echo "Creating virtual environment..."
                 sh 'python3 -m venv venv'
                 sh '. venv/bin/activate && pip install --upgrade pip setuptools wheel'
 
-                echo "📦 Встановлення залежностей..."
+                echo "Installing dependencies..."
                 sh '. venv/bin/activate && pip install .'
 
-                echo "✅ Запуск тестів..."
+                echo "Running tests..."
                 sh '. venv/bin/activate && pytest || true'
             }
         }
 
         stage('Package and Deploy') {
             steps {
-                echo "📦 Створення Python-пакету..."
+                echo "Creating Python package..."
                 sh '''
                     . venv/bin/activate
                     rm -rf dist/*
                     python setup.py sdist bdist_wheel
                 '''
 
-                echo "🚀 Завантаження пакету на Test PyPI..."
+                echo "Uploading package to Test PyPI..."
                 sh '''
                     . venv/bin/activate
                     pip install --upgrade twine
@@ -41,10 +41,10 @@ pipeline {
 
     post {
         success {
-            echo "🎉 Успішне виконання Pipeline!"
+            echo "Pipeline executed successfully!"
         }
         failure {
-            echo "❌ Помилка у Pipeline. Перевір логи."
+            echo "Pipeline failed. Check the logs."
         }
     }
 }
